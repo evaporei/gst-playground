@@ -3,7 +3,7 @@
 int
 tutorial_main (int argc, char *argv[])
 {
-  GstElement *pipeline, *source, *convert, *sink;
+  GstElement *pipeline, *source, *filter, *convert, *sink;
   GstBus *bus;
   GstMessage *msg;
   GstStateChangeReturn ret;
@@ -13,20 +13,21 @@ tutorial_main (int argc, char *argv[])
 
   /* Create the elements */
   source = gst_element_factory_make ("videotestsrc", "source");
+  filter = gst_element_factory_make ("vertigotv", "filter");
   convert = gst_element_factory_make ("videoconvert", "convert");
   sink = gst_element_factory_make ("autovideosink", "sink");
 
   /* Create the empty pipeline */
   pipeline = gst_pipeline_new ("test-pipeline");
 
-  if (!pipeline || !source || !convert || !sink) {
+  if (!pipeline || !source || !convert || !filter || !sink) {
     g_printerr ("Not all elements could be created.\n");
     return -1;
   }
 
   /* Build the pipeline */
-  gst_bin_add_many (GST_BIN (pipeline), source, convert, sink, NULL);
-  if (gst_element_link_many (source, convert, sink, NULL) != TRUE) {
+  gst_bin_add_many (GST_BIN (pipeline), source, filter, convert, sink, NULL);
+  if (gst_element_link_many (source, filter, convert, sink, NULL) != TRUE) {
     g_printerr ("Elements could not be linked.\n");
     gst_object_unref (pipeline);
     return -1;
