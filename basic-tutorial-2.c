@@ -34,7 +34,9 @@ tutorial_main (int argc, char *argv[])
   }
 
   /* Modify the source's properties */
-  g_object_set (source, "pattern", 0, NULL);
+  // 1 = snow
+  // https://gstreamer.freedesktop.org/documentation/videotestsrc/index.html?gi-language=c#GstVideoTestSrcPattern
+  g_object_set (source, "pattern", 1, NULL);
 
   /* Start playing */
   ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
