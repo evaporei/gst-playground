@@ -38,6 +38,9 @@ tutorial_main (int argc, char *argv[])
   // https://gstreamer.freedesktop.org/documentation/videotestsrc/index.html?gi-language=c#GstVideoTestSrcPattern
   g_object_set (source, "pattern", 1, NULL);
 
+  // make it faster
+  g_object_set (filter, "zoom-speed", 1.05f, NULL);
+
   /* Start playing */
   ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
   if (ret == GST_STATE_CHANGE_FAILURE) {
