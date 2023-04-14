@@ -88,8 +88,10 @@ int main(int argc, char *argv[]) {
           if (GST_MESSAGE_SRC (msg) == GST_OBJECT (data.pipeline)) {
             GstState old_state, new_state, pending_state;
             gst_message_parse_state_changed (msg, &old_state, &new_state, &pending_state);
-            g_print ("Pipeline state changed from %s to %s:\n",
-                gst_element_state_get_name (old_state), gst_element_state_get_name (new_state));
+            g_print ("States; old: %s, pending: %s, new: %s:\n",
+                gst_element_state_get_name (old_state), 
+                gst_element_state_get_name (pending_state), 
+                gst_element_state_get_name (new_state));
           }
           break;
         default:
