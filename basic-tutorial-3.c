@@ -92,6 +92,9 @@ int main(int argc, char *argv[]) {
                 gst_element_state_get_name (old_state), 
                 gst_element_state_get_name (pending_state), 
                 gst_element_state_get_name (new_state));
+            /* States; old: NULL, pending: PLAYING, new: READY: */
+            /* States; old: READY, pending: PLAYING, new: PAUSED: */
+            /* States; old: PAUSED, pending: VOID_PENDING, new: PLAYING: */
           }
           break;
         default:
@@ -119,6 +122,8 @@ static void pad_added_handler (GstElement *src, GstPad *new_pad, CustomData *dat
   const gchar *new_pad_type = NULL;
 
   g_print ("Received new pad '%s' from '%s':\n", GST_PAD_NAME (new_pad), GST_ELEMENT_NAME (src));
+  /* Received new pad 'src_0' from 'source': */
+  /* Received new pad 'src_1' from 'source': */
 
   /* If our converter is already linked, we have nothing to do here */
   if (gst_pad_is_linked (sink_pad)) {
@@ -132,6 +137,7 @@ static void pad_added_handler (GstElement *src, GstPad *new_pad, CustomData *dat
   new_pad_type = gst_structure_get_name (new_pad_struct);
   if (!g_str_has_prefix (new_pad_type, "audio/x-raw")) {
     g_print ("It has type '%s' which is not raw audio. Ignoring.\n", new_pad_type);
+    /* It has type 'video/x-raw' which is not raw audio. Ignoring. */
     goto exit;
   }
 
@@ -141,6 +147,7 @@ static void pad_added_handler (GstElement *src, GstPad *new_pad, CustomData *dat
     g_print ("Type is '%s' but link failed.\n", new_pad_type);
   } else {
     g_print ("Link succeeded (type '%s').\n", new_pad_type);
+    /* Link succeeded (type 'audio/x-raw'). */
   }
 
 exit:
