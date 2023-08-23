@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
   queue_audio_pad = gst_element_get_static_pad (audio_queue, "sink");
 
   tee_video_pad = gst_element_request_pad_simple (tee, "src_%u");
-  g_print ("Obtained request pad %s for video branch\n", gst_pad_get_name (tee_audio_pad));
+  g_print ("Obtained request pad %s for video branch\n", gst_pad_get_name (tee_video_pad));
   queue_video_pad = gst_element_get_static_pad (video_queue, "sink");
 
   if (gst_pad_link (tee_audio_pad, queue_audio_pad) != GST_PAD_LINK_OK
