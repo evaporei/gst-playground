@@ -6,6 +6,7 @@ project('gst-playground', 'c',
 # glib = dependency('glib-2.0')
 gstreamer = dependency('gstreamer-1.0') 
 gstreamer_video = dependency('gstreamer-video-1.0')
+gstreamer_audio = dependency('gstreamer-audio-1.0')
 gtk = dependency('gtk+-3.0')
 
 executable('basic-tutorial-1', 'basic-tutorial-1.c', dependencies : gstreamer)
@@ -15,3 +16,4 @@ executable('basic-tutorial-4', 'basic-tutorial-4.c', dependencies : gstreamer)
 executable('basic-tutorial-5', 'basic-tutorial-5.c', dependencies : [gstreamer, gstreamer_video, gtk])
 executable('basic-tutorial-6', 'basic-tutorial-6.c', dependencies : gstreamer)
 executable('basic-tutorial-7', 'basic-tutorial-7.c', dependencies : gstreamer)
+executable('basic-tutorial-8', 'basic-tutorial-8.c', dependencies : [gstreamer, gstreamer_audio])
